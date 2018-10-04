@@ -1,0 +1,3 @@
+class MoneyMaster
+
+end
