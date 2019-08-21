@@ -1,0 +1,69 @@
+<div class="base">
+  <div class="main-content">
+    <h1>
+      Recent transactions
+    </h1>
+
+    <% @new_transactions.group_by {|transaction| transaction.plaid_account.name}.each do |account_name, transactions| %>
+      <%=
+        render "recent_transactions_table",
+               account_name: account_name,
+               transactions: transactions,
+               grouped_by_normalized_description: @grouped_by_normalized_description
+      %>
+    <% end %>
+
+    <table class="account-balances-table">
+      <%
+        today = Time.zone.today
+        dates_to_display = [0, 1, 3, 6, 12].map {|num_months| today - num_months.months}
+        total_balances_per_date = Hash.new(0)
+      %>
+      <thead>
+      <tr>
+        <th/>
+        <% dates_to_display.each do |date_to_display| %>
+          <th><%= date_to_display %></th>
+        <% end %>
+      </tr>
+      <% @daily_account_balances.each do |(account, daily_balances)| %>
+        <tr>
+          <td><%= account.name %></td>
+          <% dates_to_display.each do |date| %>
+            <td><%= number_to_currency(daily_balances[date]) %></td>
+            <% total_balances_per_date[date] += daily_balances[date].to_f %>
+          <% end %>
+        </tr>
+      <% end %>
+      <tr>
+        <td>Total</td>
+        <% total_balances_per_date.values.each do |total_balance| %>
+          <td><%= number_to_currency(total_balance) %></td>
+        <% end %>
+      </tr>
+      </thead>
+    </table>
+
+    <table class="savings-rate-table">
+      <thead>
+      <tr>
+        <th>Period Ending</th>
+        <% @savings_per_period.values.first.keys.each do |metric| %>
+          <th><%= metric.to_s.sub('_', ' ').titleize %></th>
+        <% end %>
+      </tr>
+
+      <% @savings_per_period.each do |(period, period_data)| %>
+        <tr>
+          <th><%= period %></th>
+          <% period_data.each do |(metric, value)| %>
+            <td>
+              <%= metric.to_s.include?('rate') ? number_to_percentage(value * 100, precision: 0) : number_to_currency(value) %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </thead>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,133 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+// Foundations
+// These variables generally follow the specs outlined in the Milo documentation:
+
+
+// --------------------------------------------------------------------------------
+// SPACING (i.e. margin, padding, top, right, left, etc.)
+// --------------------------------------------------------------------------------
+
+$spacing-xsmall: 5px;
+$spacing-small: 10px;
+$spacing-medium: 20px;
+$spacing-large: 40px;
+$spacing-xlarge: 60px;
+
+
+// --------------------------------------------------------------------------------
+// TYPOGRAPHY
+// --------------------------------------------------------------------------------
+
+$font-family-default: 'Gotham Narrow', Helvetica, Arial, sans-serif;
+$font-family-alt: 'Gotham', Helvetica, Arial, sans-serif;
+$font-family-lava: 'Lava', Helvetica, Arial, sans-serif;
+
+$font-size-xsmall: 10px;
+$font-size-small: 12px;
+$font-size-medium: 14px;
+$font-size-large: 16px;
+$font-size-xlarge: 20px;
+
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$line-height-medium: 1.4;
+
+$letter-spacing-medium: 1px;
+
+
+// --------------------------------------------------------------------------------
+// COLORS
+// --------------------------------------------------------------------------------
+
+@function tint($color, $percentage) {
+  @return mix(#fff, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(#000, $color, $percentage);
+}
+
+// Grayscale
+$midnight: #303640; // "black"
+$snow: #fff; // "white"
+
+$concrete: #8199a3;
+$shadow: shade($concrete, 10%); // #748a93
+$manatee: tint($concrete, 20%); // #9aadb5
+$silver: tint($concrete, 40%); // #b3c2c8
+$timberwolf: tint($concrete, 60%); // #cdd6da
+
+$ice: #ecf1f5;
+$diamond: tint($ice, 40%); // #f4f7f9
+
+// Reds
+$strawberry: #ec5453;
+$watermelon: shade($strawberry, 10%); // #d44c4b
+$flamingo: tint($strawberry, 60%); // #f7bbba
+$blush: tint($strawberry, 75%); // #fad4d4
+$blossom: tint($strawberry, 90%); // #fdeeee
+
+// Yellows
+$banana: #fbfdbf;
+
+$goldenrod: #b8b24f;
+
+// Greens
+$shamrock: #37b375;
+$fern: shade($shamrock, 10%); // #32a169
+$pear: tint($shamrock, 60%); // #afe1c8
+$honeydew: tint($shamrock, 75%); // #cdecdd
+$mint: tint($shamrock, 90%); // #ebf7f1
+
+// Blues
+$cerulean: #39b6e9;
+$teal: shade($cerulean, 10%); // #33a4d2
+$sky: tint($cerulean, 20%); // #61c5ed
+$tropical: tint($cerulean, 75%); // #ceedfa
+$mist: tint($cerulean, 90%); // #ebf8fd
+
+$denim: #243f69;
+
+$navy: #1a2c47;
+
+// Violets
+$plum: #645187;
+$mischka: tint($plum, 75%); // #d8d4e1
+
+
+// --------------------------------------------------------------------------------
+// OTHER
+// --------------------------------------------------------------------------------
+
+$border-radius-medium: 4px;
+
+$transition-duration-medium: .2s;
+$transition-easing-default: ease;
+
+
+body {
+    font-family: Open-Sans, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+small {
+  color: $concrete;
+  font-size: 65%;
+}

@@ -1,0 +1,53 @@
+<h3><%= account_name %></h3>
+<table class="recent-transactions-table">
+  <thead>
+  <tr>
+    <th class="date-field">Date</th>
+    <th class="description-field">Description</th>
+    <th class="amount-field">Amount</th>
+    <th class="last-field">Last Seen</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% transactions.each do |transaction| %>
+    <tr>
+      <td>
+        <%= transaction.date.strftime("%A") %><br>
+        <small><%= transaction.date.strftime("%b %-d, %Y") %></small>
+      </td>
+      <td>
+        <% if transaction.normalized_description != transaction.description %>
+          <div><%= transaction.normalized_description %></div>
+          <div>
+            <small><%= transaction.description %></small>
+          </div>
+        <% else %>
+          <div><%= transaction.description %></div>
+        <% end %>
+      </td>
+      <td><%= transaction.amount_formatted %></td>
+      <td>
+        <%
+          vendor_transactions = grouped_by_normalized_description[transaction.normalized_description].sort_by(&:date)
+          most_recent_transaction = vendor_transactions.select {|t| transaction.id != t.id}.last
+          is_monthly = false
+
+          if vendor_transactions.length > 2
+            dates = vendor_transactions.map(&:date)
+            monthly_occurrences = ((1..dates.length - 1)).count {|i| (dates[i] - dates[i - 1]).to_i.between?(28, 32)}
+            is_monthly = (monthly_occurrences.to_f / (vendor_transactions.length - 1)) > 0.80
+          end
+        %>
+        <div>
+          <% if most_recent_transaction %>
+            <%= most_recent_transaction.date.strftime("%b %-d, %Y") %><br>
+            <small><%= "For #{most_recent_transaction.amount_formatted}" %></small>
+          <% else %>
+            <%= "Never" %>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

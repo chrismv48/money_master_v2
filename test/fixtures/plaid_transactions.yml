@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: plaid_transactions
+#
+#  id                :string           not null, primary key
+#  plaid_account_id  :string           not null
+#  amount            :float            not null
+#  date              :date
+#  iso_currency_code :string
+#  description       :string
+#  pending           :boolean
+#  transaction_type  :string
+#  category_id       :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value
