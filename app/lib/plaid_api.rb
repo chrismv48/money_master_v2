@@ -48,9 +48,9 @@ class PlaidApi
 
   attr_reader :access_token, :public_token, :environment, :client
 
-  CLIENT_ID = Rails.application.credentials.plaid_api.client_id
-  SECRET = Rails.application.credentials.plaid_api.secret
-  PUBLIC_KEY = Rails.application.credentials.plaid_api.public_key
+  CLIENT_ID = Rails.application.credentials.plaid_api[:client_id]
+  SECRET = Rails.application.credentials.plaid_api[:secret]
+  PUBLIC_KEY = Rails.application.credentials.plaid_api[:public_key]
 
   SANDBOX_HOST = "https://sandbox.plaid.com".freeze
   DEVELOPMENT_HOST = "https://development.plaid.com".freeze
