@@ -1,5 +1,4 @@
 require 'plaid'
-require 'pry'
 require 'active_support/all'
 
 # Item: a set of credentials at a financial institution; each Item can have many Accounts, and some Accounts have Transactions associated with them
