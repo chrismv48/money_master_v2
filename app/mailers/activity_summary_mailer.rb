@@ -73,7 +73,7 @@ class ActivitySummaryMailer < ApplicationMailer
       end
     end
 
-    mail(to: 'chris.r.armstrong@gmail.com', subject: 'Activity Summary')
+    mail(to: Rails.application.credentials.gmail[:username] + '@gmail.com', subject: 'Activity Summary')
   end
 
 end
